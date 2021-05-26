@@ -30,7 +30,7 @@ class WelcomeController extends Controller
     // {
     //     return view('lienhe');
     // }
-    public function demo()
+    public function contact()
     {
         $contact=['Contact 1','Contact 2', 'Contact 3'];
         return view('partial.contact', compact('contact'));

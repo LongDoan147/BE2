@@ -17,7 +17,7 @@ class CheckAge
     {
         $user = $request->input('user');
         $pass = $request->input('pass');
-        if($user == 'admin' && $pass == '123'){
+        if($user == 'doanho147@gmail.com' && $pass == '0522943403aA'){
             return redirect('/admin/true');
         }
         return redirect('/login');
