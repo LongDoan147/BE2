@@ -49,12 +49,12 @@ class ProductController extends Controller
         $data['description'] = $request->product_description;
         $data['hot'] = $request->product_hot;
         $data['sale'] = $request->product_sale;
-        $data['image'] = $request->img_product;
-        $get_image = $request->file('image');
+        $data['image'] = $request->file('img_product')->getClientOriginalName();
+        $get_image = $request->file('img_product');
         if ($get_image) {
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
-            $new_image = $name_image.rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+            $new_image = $name_image. $get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/product',$new_image);
             $data['image'] = $new_image;
             DB::table('products')->insert($data);
@@ -119,7 +119,15 @@ class ProductController extends Controller
         ->join('category', 'category.cate_id', '=', 'products.cate_id')
         ->join('manufactures', 'manufactures.manu_id', '=', 'products.manu_id')
         ->where('products.id',$product_id)->get();
+
+        foreach($details_products as $key =>$value){
+            $category_id = $value->cate_id; 
+       }
+       $related_products = DB::table('products')
+       ->join('category', 'category.cate_id', '=', 'products.cate_id')
+       ->join('manufactures', 'manufactures.manu_id', '=', 'products.manu_id')
+       ->where('category.cate_id',$category_id)->whereNotIn('products.id', [$product_id])->limit(3)->get();
             return view('sanpham.show_details')->with('category', $cate_product)->with('brand', $brand_product)
-            ->with('details', $details_products);
+            ->with('details', $details_products)->with('relate', $related_products);
        }
 }

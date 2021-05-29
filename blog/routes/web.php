@@ -62,25 +62,16 @@ Route::get('/all-product',"ProductController@all_product" );
 Route::post('/save-product',"ProductController@save_product" );
 Route::post('/update-product/{id}',"ProductController@update_product" );
 
-// Route::get('/home', 'HomeController@index')->name('home');
- //Route::get('/contact', 'WelcomeController@contact');
+//cart
+Route::post('/save-cart',"cartController@save_cart");
+Route::post('/update-cart-quantity',"cartController@update_cart_quantity");
+Route::get('/show-cart',"cartController@show_cart");
+Route::get('/delete-to-cart/{rowId}',"cartController@delete_to_cart");
 
-//Route::get('/admin')->middleware('checkage');
-// Route::get('/trangchu', function () {
-//     return view('trangchu');
-// });
-// Route::get('/gioithieu', function () {
-//     return view('gioithieu');
-// });
-// Route::get('/lienhe', function () {
-//     return view('lienhe');
-// });
-//Route::get('/', 'WelcomeController@index');
-//Route::get('/{controller?}/{id?}', 'WelcomeController@index');
-//Route::get('/gioithieu', 'WelcomeController@gioithieu');
-//Route::get('/lienhe', 'WelcomeController@lienhe');
-//Route::get('product','WelcomeController@getAllProduct');
-//Route::get('manufacture','WelcomeController@getAllManufacture');
+//checkout:
+Route::get('//login-checkout',"CheckoutController@login_checkout");
+
+
 
 
 
